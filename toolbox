@@ -13,6 +13,7 @@ declare -A lang
 lang[welcome_text]="\nWelcome to ${0}, for further informations go to http://github.com/jmurowaniecki/toolbox"
 lang[welcome_text_htaccess]="Project ${project}"
 lang[basic_help]="${0} is a linux Toolbox for services and client managment.\nTry to execute \`${0} new project_name [user_name] [password]\`."
+lang[not_sudo]="Permission denied."
 
 function proc_new {
     encrypted_password=`openssl passwd -1 ${password}`
@@ -38,6 +39,9 @@ then
                 ;;
         esac
     else
-        echo ${lang[basic_help]}
+        echo -e ${lang[basic_help]}
     fi
+else
+    sudo ${0} $* && exit 0
+    echo "${lang[not_sudo]}"
 fi

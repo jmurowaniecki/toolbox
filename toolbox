@@ -40,7 +40,7 @@ trap 'try_trapp $*' INT
 
 
 function scaffold_new {
-    if [ ${#} -lt 2 ]
+    if [ ${#} -lt 1 ]
     then
         echo "
 Use ${color[command]}\`${0} new [project_name]\`${color[reset]} to create a new project into ${color[option]}${STD_FOLDER}${color[option]}."
@@ -71,6 +71,7 @@ So we need to apply a password: " password
             encrypted=`openssl passwd -1 ${password}`
             useradd -m -s /bin/false -p ${encrypted} ${username} -d "${directory}"
             htpasswd -bcmd "${directory}/.htpasswd" "${username}" "${password}"
+            smbpasswd -a -w "${password}" "${username}"
             echo "AuthName \"Projeto ${1}\"
 AuthType Basic
 AuthUserFile ${directory}/.htpasswd

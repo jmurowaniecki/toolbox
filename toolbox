@@ -17,10 +17,13 @@ username=${3:-"${project}"}
 password=${4:-"${STD_PASSWORD}"}
 directory="${STD_FOLDER}${project}"
 
+attention=`tput setaf 3`
+normalize=`tput sgr0`
+
 declare -A lang
-lang[welcome_text]="\nWelcome to ${0}, for further informations go to http://github.com/jmurowaniecki/toolbox"
+lang[welcome_text]="\nWelcome to ${attention}${0}${normalize}, for further informations go to ${attention}http://github.com/jmurowaniecki/toolbox${normalize}"
 lang[welcome_text_htaccess]="Project ${project}"
-lang[basic_help]="${0} is a linux Toolbox for services and client managment.\nTry to execute \`${0} new project_name [user_name] [password]\`."
+lang[basic_help]="${0} is a linux Toolbox for services and client managment.\n\nTry to execute ${attention}\`${0} new project_name [user_name] [passwor]\`${normalize}."
 lang[not_sudo]="Permission denied."
 
 function proc_new {
